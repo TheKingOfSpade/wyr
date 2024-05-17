@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+    include ../mixins/comment
+    div.container.wyr
+        h1 Would You Rather!!
+        if user && choice.isOwnedBy(user)
+            a.button(href=`/choice/${choice.id}/edit`) Edit
+        if user && user.is('admin')
+            a.button(href=`/choice/${choice.id}/delete`) Delete
+        div.content
+            div.choice_1
+                a.button.choice_1(href='/choice/add') #{choice.choice_1}
+            div.choice_2
+                a.button.choice_2(href='/choice/add') #{choice.choice_2}
+            div.image
+                img.choice-image(src="https://www.pngall.com/wp-content/uploads/13/VS-PNG-Images.png")
+        p.published-on Published
+            strong.emphasize #{choice.friendlyPublishedDate}
+            | by
+            strong.emphasize #{choice.author.first_name}
+
+        div.comment-section
+            h3.comment-section-title Comments (#{choice.comments.length})
+            div.comment-form
+                form(action=`/choice/${choice.id}/comment/create` method='post')
+                    div.input-container.wide
+                        label(for="author_name").form-label Your name
+                        input(type="text" name="author_name" id="author_name" required=true)
+                    div.input-container.wide
+                        textarea(placeholder="Your comment here..." required=true name="body" id="body" cols="80" rows="5")
+                    div
+                        button.button.comment(type="submit") Comment
+
+            ul.comment-list
+                each comment in choice.comments
+                    li
+                        +comment(comment)

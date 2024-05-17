@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+    include ../mixins/choiceForm
+    div.content
+        +choiceForm(choice, 'Update', `/choice/${choice.id}/edit`, `/choice/${choice.id}`, `/choice/${choice.id}/delete`)

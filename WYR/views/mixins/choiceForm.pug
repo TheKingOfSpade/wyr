@@ -1,0 +1,13 @@
+mixin choiceForm(choice, buttonText, saveUrl, cancelUrl, deleteUrl)
+    form(action=saveUrl method="post")
+      div.add
+        div.input-container.wide
+            label(for="choice_1").form-label Choice 1
+            input(type="text" name="choice_1" id="choice_1" required=true placeholder="Be a dog" value=choice.choice_1)
+        div.input-container.wide
+            label(for="choice_2").form-label Choice 2
+            input(type="text" name="choice_2" id="choice_2" required=true placeholder="Be a cat" value=choice.choice_2)
+        a.button.cancel(href=cancelUrl) Cancel
+        if(deleteUrl && user && choice.isOwnedBy(user))
+            a.button.delete(href=deleteUrl) Delete
+        button.button.primary(type="submit") #{buttonText}    

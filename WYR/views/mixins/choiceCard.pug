@@ -1,0 +1,10 @@
+mixin choiceCard(choice)
+    a.card(href=`/choice/${choice.id}`)
+        img.card-image(src="https://vorensstudios.com/wp-content/uploads/Would-You-Rather-Icon.png")
+        div.card-body
+            div.card-title= 'Would You Rather?'
+            p.published-on Published
+                strong.emphasize #{choice.friendlyPublishedDate}
+                | by
+                strong.emphasize #{choice.author.first_name}
+            div.card-hook=choice.intro

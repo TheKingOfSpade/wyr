@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    include ../mixins/choiceCard
+    div.choices-header
+        div
+            if user && user.is('author')
+                a.button.primary(href='/choice/add') Make new game
+
+    ul.choice-list
+        each choice in choices
+            li
+                +choiceCard(choice)
